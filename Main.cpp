@@ -575,7 +575,6 @@ BinaryImage BinaryImage::getblock(int start_row, int end_row, int start_col, int
 {
 	//cout << "getblock(int start_row, int end_row, int start_col, int end_col) is invoked" << endl;
 
-
 	BinaryImage X(end_row - start_row + 1, end_col - start_col + 1, 0.0, 170);
 
 	for (int i = start_row; i <= end_row; i++)
