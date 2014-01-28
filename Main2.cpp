@@ -2,6 +2,8 @@
 #include <iostream> // cout, cerr
 #include <fstream> // ifstream
 #include <istream>
+#include "Matrix.h"
+
 using namespace std;
 
 
@@ -15,7 +17,7 @@ void WritePGM(char *filename, double *data, int sizeR, int sizeC, int Q);
 
 
 
-
+/*
 class Matrix{
 
 public:
@@ -26,7 +28,7 @@ public:
 	//Copy constructor
 	Matrix(const Matrix& X);
 	//call the destructor class
-	~Matrix(){ /*cout <<"~Matrix() Destructor is invoked ..." << endl;*/ delete[] data; }
+	~Matrix();
 
 	//Operators
 	Matrix operator+(const Matrix& X);
@@ -36,35 +38,25 @@ public:
 	Matrix operator=(const Matrix& X);
 	Matrix operator++();//increment
 	Matrix operator--();//decrement
-	double operator()(int i, int j)const{ cout << "Matrix::operator() is invoked..." << endl; return data[i*N + j]; }; // Operator () == get function
+	double operator()(int i, int j)const;  // Operator () == get function
 
 	//get the value from the matrix class data
-	double get(int i, int j) const { return data[i*N + j]; }// const will stop the function from changing values in the matrix
+	double get(int i, int j) const;// const will stop the function from changing values in the matrix
 
 	//set a new value for a element in the martix class data
-	void set(int i, int j, double val){ data[i*N + j] = val; }
+	void set(int i, int j, double val); 
 
 	//Matrix getblock 
 	Matrix getblock(int start_row, int end_row, int start_col, int end_col);
 
 	//get M
-	int getM()const{ return M; };
+	int getM()const;
 
 	//get N
-	int getN()const { return N; };
+	int getN()const; 
 
 	//output the whole matrix
-	void Output_Matrix(int row, int col){
-		for (int i = 0; i < row; i++)    //This loops on the rows.
-		{
-			for (int j = 0; j < col; j++) //This loops on the columns
-			{
-				cout << data[i*N + j] << "";
-			}
-			cout << endl;
-		}
-	};
-
+	void Output_Matrix(int row, int col);
 
 protected:
 	int M; //number of rows
@@ -72,6 +64,7 @@ protected:
 	double* data;
 
 };
+*/
 
 class BinaryImage : public Matrix{
 
@@ -321,6 +314,8 @@ void WritePGM(char *filename, double *data, int sizeR, int sizeC, int Q)
 	delete[] image;
 }
 
+/*
+
 //Matrix constructors
 Matrix::Matrix(int sizeR, int sizeC, double val){
 	//cout << "Matrix(int, int, double) Constructor is invoked ..." << endl;
@@ -361,7 +356,12 @@ Matrix::Matrix(const Matrix& X)
 		data[i] = X.data[i];
 	}
 }
-
+//deconstructor
+Matrix::~Matrix()
+{
+	
+	delete[] data; 
+}
 //Matrix operators 
 Matrix Matrix::operator+(const Matrix& X)
 {
@@ -471,6 +471,45 @@ Matrix Matrix::operator-- ()
 		return *this;
 	}
 }
+double Matrix::operator()(int i, int j)const
+{ cout << "Matrix::operator() is invoked..." << endl; 
+return data[i*N + j]; 
+}
+
+//get, get a value from data
+double Matrix::get(int i, int j) const
+{
+	return data[i*N + j];
+}
+
+//set, set a a vale to data
+void Matrix::set(int i, int j, double val)
+{
+	data[i*N + j] = val;
+}
+
+//GetM, get the value M from class data member
+int Matrix::getM()const
+{
+	return M;
+}
+//GetN, get the value N from class data member
+int Matrix::getN()const
+{
+	return N;
+}
+
+//Out_Matrix, output from data, using Row and col to define where
+void Matrix::Output_Matrix(int row, int col){
+	for (int i = 0; i < row; i++)    //This loops on the rows.
+	{
+		for (int j = 0; j < col; j++) //This loops on the columns
+		{
+			cout << data[i*N + j] << "";
+		}
+		cout << endl;
+	}
+};
 
 //Matrix get block 
 Matrix Matrix::getblock(int start_row, int end_row, int start_col, int end_col)
@@ -490,6 +529,7 @@ Matrix Matrix::getblock(int start_row, int end_row, int start_col, int end_col)
 	}
 	return X;
 	}
+	*/
 
 //BinaryImage constructors
 BinaryImage::BinaryImage(int M, int N, double* input_data, double thresh) :Matrix(M, N, input_data)

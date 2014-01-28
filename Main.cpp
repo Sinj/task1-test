@@ -126,10 +126,10 @@ int main(){
 	//	}
 	//	cout << endl;
 	//}
-	int o = 0, count = 0;
+	int o=0,count=0;
 	BinaryImage A(M, N, input_data_noise, thresh);
 	BinaryImage B(M, N, input_data_shuffle, thresh);
-
+	
 	//BinaryImage E(M, N, 0.0, thresh);
 
 	for (int i = 0; i < 16; i++)
@@ -137,15 +137,15 @@ int main(){
 		BinaryImage C = A.getblock(i * 32, i * 32 + 31, j * 32, j * 32 + 31);//get a block from unnoised, to compare agienst
 		for (int ii = 0; ii < 16; ii++)
 		for (int jj = 0; jj < 16; jj++){//check agienst 16 times
-
+			
 			BinaryImage	D = B.getblock(jj * 32, jj * 32 + 31, jj * 32, jj * 32 + 31);//takea block from shuffled, to compare agienst
-			//D.Output_Matrix(32,32)
+				//D.Output_Matrix(32,32)
 			sdcom = SSD(C, D);
 			if (sdcom < sd)
 			{
 				if (){}
 
-
+				
 				//for (int i = 0; i < 31; i++)    //This loops on the rows.
 				//{
 				//	for (int j = 0; j < 31; j++) //This loops on the columns
@@ -158,7 +158,7 @@ int main(){
 				{
 					for (int j = o; j < 32; j++) //This loops on the columns
 					{
-						input_data_shuffle[(ii * 32) + i] = D.get(i, j);
+						input_data_shuffle[(ii*32)+i] = D.get(i, j);
 						//count++;
 					}
 				}
@@ -185,7 +185,7 @@ int main(){
 		//}
 
 	}
-
+	
 
 	// outputs image path(where the image will be)
 
@@ -457,8 +457,8 @@ Matrix Matrix::getblock(int start_row, int end_row, int start_col, int end_col)
 		}
 	}
 	/*cout<<endl;
-	X.Output_Matrix(32,32);
-	getchar();*/
+X.Output_Matrix(32,32);
+getchar();*/
 	return X;
 
 
@@ -548,7 +548,7 @@ BinaryImage BinaryImage::operator-(const BinaryImage& X)
 		}
 		Z.set(i, j, val);
 	}
-	Z.Output_Matrix(M, N);
+	Z.Output_Matrix(M,N);
 	return Z;
 }
 BinaryImage BinaryImage::operator*(const BinaryImage& X)
@@ -574,6 +574,7 @@ BinaryImage BinaryImage::operator*(const BinaryImage& X)
 BinaryImage BinaryImage::getblock(int start_row, int end_row, int start_col, int end_col)
 {
 	//cout << "getblock(int start_row, int end_row, int start_col, int end_col) is invoked" << endl;
+
 
 	BinaryImage X(end_row - start_row + 1, end_col - start_col + 1, 0.0, 170);
 
