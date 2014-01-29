@@ -1,5 +1,5 @@
+//BinaryImage function .cpp file
 #include "BinaryImage.h"
-
 //BinaryImage constructors
 BinaryImage::BinaryImage(int M, int N, double* input_data, double thresh) :Matrix(M, N, input_data)
 {
