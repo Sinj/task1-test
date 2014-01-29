@@ -13,7 +13,9 @@ double* readTXT(char *fileName, int sizeR, int sizeC);
 
 //Makes .pgm image file
 void WritePGM(char *filename, double *data, int sizeR, int sizeC, int Q);
-bool work = true ;
+
+//bool to check if txt files have been read
+bool File_has_read = true;
 
 int main(){
 	
@@ -38,7 +40,7 @@ int main(){
 	inputFileName = "C:\\Users\\Sinjun\\Desktop\\Assignment 1 - files\\Task1files\\logo_shuffled.txt";
 	input_data_shuffle = readTXT(inputFileName, M, N);
 
-	if (work)//check the that text files where both read
+	if (File_has_read)//check the that text files where both read
 	{
 
 		BinaryImage noise(M, N, input_data_noise, thresh);//store the noiseed image
@@ -125,7 +127,7 @@ double* readTXT(char *fileName, int sizeR, int sizeC)
 	else
 	{
 		cout << "Unable to open file at loaction:" << endl << fileName << endl << endl;
-		work = false;
+		File_has_read = false;
 	}
 	
 	return data;
