@@ -48,7 +48,7 @@ int main(){
 
 		BinaryImage E(M, N, 0.0, thresh);//will be used to store the compared blocks
 
-		double SSD = 0;// to store the differants 
+		double SSD = 0;// to store the SSD 
 
 		for (int i = 0; i < 16; i++)
 		for (int j = 0; j < 16; j++){
@@ -58,7 +58,7 @@ int main(){
 			for (int jj = 0; jj < 16; jj++){//check agienst 16 times
 				BinaryImage	D = noise.getblock(ii * 32, ii * 32 + 31, jj * 32, jj * 32 + 31);//take a block from shuffled, to compare agienst
 
-				//loop & nest for finding the diff
+				//loop & nest for finding the SSD
 				for (int k = 0; k < 32; k++)
 				for (int l = 0; l < 32; l++)
 				{
@@ -73,7 +73,7 @@ int main(){
 						E.set((ii * 32) + b, (jj * 32) + v, (C.get(b, v)));//save location 
 					}
 				}
-				SSD = 0; // reset the diff
+				SSD = 0; // reset the SSD
 			}
 		}
 		cout << "-------------- Comparing images complete --------------" << endl << endl;
