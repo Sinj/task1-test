@@ -8,20 +8,19 @@
 using namespace std;
 
 
-// Reads .txt file 
+//Reads .txt file 
 double* readTXT(char *fileName, int sizeR, int sizeC);
 
-// Converts a 1D array of doubles of size R*C to .pgm image of R rows and C Columns 
-// and stores .pgm in filename
-// Use Q = 255 for greyscale images and Q=1 for binary images.
+//Makes .pgm image file
 void WritePGM(char *filename, double *data, int sizeR, int sizeC, int Q);
 bool work = true ;
 
 int main(){
-	int pause=0;
+	
 	//M = Rows and N = columns in the image,
 	int M = 512; int N = 512;
-	//threshhold
+
+	//threshhold that will be used to remove the noise from image
 	double thresh = 170;
 	
 	//store both image data
@@ -45,7 +44,7 @@ int main(){
 		BinaryImage noise(M, N, input_data_noise, thresh);//store the noiseed image
 		BinaryImage shuffle(M, N, input_data_shuffle, thresh);//store the shuffled image
 
-		BinaryImage E(M, N, 0.0, thresh);
+		BinaryImage E(M, N, 0.0, thresh);//will be used to store the compared blocks
 
 		double dif = 0;// to store the differants 
 
