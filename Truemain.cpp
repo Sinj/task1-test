@@ -48,7 +48,7 @@ int main(){
 
 		BinaryImage E(M, N, 0.0, thresh);//will be used to store the compared blocks
 
-		double dif = 0;// to store the differants 
+		double SSD = 0;// to store the differants 
 
 		for (int i = 0; i < 16; i++)
 		for (int j = 0; j < 16; j++){
@@ -62,18 +62,18 @@ int main(){
 				for (int k = 0; k < 32; k++)
 				for (int l = 0; l < 32; l++)
 				{
-					dif += (D.get(k, l) - C.get(k, l)) * (D.get(k, l) - C.get(k, l));//work out the diff
+					SSD += (D.get(k, l) - C.get(k, l)) * (D.get(k, l) - C.get(k, l));//work out the diff
 				}
 
-				if (dif == 0)// must of found a match
-				{
+				if (SSD == 0)// must of found a match
+				{//store the location of the match found into E
 					for (int b = 0; b < 32; b++)
 					for (int v = 0; v < 32; v++)
 					{
 						E.set((ii * 32) + b, (jj * 32) + v, (C.get(b, v)));//save location 
 					}
 				}
-				dif = 0; // reset the diff
+				SSD = 0; // reset the diff
 			}
 		}
 		cout << "-------------- Comparing images complete --------------" << endl << endl;
