@@ -5,11 +5,13 @@ using namespace std;
 
 //Matrix constructors
 Matrix::Matrix(int sizeR, int sizeC, double val){
-	//cout << "Matrix(int, int, double) Constructor is invoked ..." << endl;
+	//Set Row size to M
+	//set coloumn size to N
 	M = sizeR;
 	N = sizeC;
 	data = new double[M*N];
 
+	//save the val to elements
 	for (int ii = 0; ii < M; ii++){
 		for (int jj = 0; jj < N; jj++){
 			data[ii*N + jj] = val;
@@ -17,12 +19,12 @@ Matrix::Matrix(int sizeR, int sizeC, double val){
 	}
 }
 Matrix::Matrix(int sizeR, int sizeC, double* pData){
-	//cout << "Matrix(int, int, double*) Constructor is invoked ..." << endl;
+	
 	M = sizeR;
 	N = sizeC;
-
+	
 	data = new double[M*N];
-
+	//copy pdata to data
 	for (int ii = 0; ii < M; ii++){
 		for (int jj = 0; jj < N; jj++){
 			data[ii*N + jj] = pData[ii*N + jj];
@@ -30,14 +32,14 @@ Matrix::Matrix(int sizeR, int sizeC, double* pData){
 	}
 
 }
+//copy constructor
 Matrix::Matrix(const Matrix& X)
 {
-	//cout << "Matrix::Matrix(const Matrix& X) is invoked" << endl;
-
+	//copy M & N 
 	M = X.M;
 	N = X.N;
 	data = new double[M*N];
-
+	//copy data
 	for (int i = 0; i < M*N; i++)
 	{
 		data[i] = X.data[i];
@@ -46,42 +48,42 @@ Matrix::Matrix(const Matrix& X)
 //deconstructor
 Matrix::~Matrix()
 {
-	/*cout <<"~Matrix() Destructor is invoked ..." << endl;*/
+	//delete data
 	delete[] data;
 }
 //Matrix operators 
 Matrix Matrix::operator+(const Matrix& X)
 {
-	//cout << "Matrix::operator+ is invoked..." << endl;
+	
 	double val = 0;
-	Matrix Z(M, N, val);
+	Matrix Z(M, N, val); //make blank matrix
 	for (int i = 0; i < M; i++)
 	for (int j = 0; j < N; j++){
-		val = data[i*N + j] + X(i, j);
-		Z.set(i, j, val);
+		val = data[i*N + j] + X(i, j); //add both elements togather
+		Z.set(i, j, val); // save val to matrix
 	}
 	return Z;
 }
 Matrix Matrix::operator-(const Matrix& X)
-{//A-B
-	//cout << "Matrix::operator- is invoked..." << endl;
+{
+	
 	double val = 0;
 	Matrix Z(M, N, val);
 	for (int i = 0; i < M; i++)
 	for (int j = 0; j < N; j++){
-		val = data[i*N + j] - X(i, j);
+		val = data[i*N + j] - X(i, j);//subtract element from element
 		Z.set(i, j, val);
 	}
 	return Z;
 }
 Matrix Matrix::operator*(const Matrix& X)
 {
-	//cout << "Matrix::operator* is invoked..." << endl;
+	
 	double val = 0;
 	Matrix Z(M, N, val);
 	for (int i = 0; i < M; i++)
 	for (int j = 0; j < N; j++){
-		val = data[i*N + j] * X(i, j);
+		val = data[i*N + j] * X(i, j);//multiply elements togather
 		Z.set(i, j, val);
 	}
 	return Z;
@@ -93,24 +95,13 @@ Matrix Matrix::operator/(const Matrix& X)
 	Matrix Z(M, N, val);
 	for (int i = 0; i < M; i++)
 	for (int j = 0; j < N; j++){
-		val = data[i*N + j] / X(i, j);
+		val = data[i*N + j] / X(i, j); // divide element from element
 		Z.set(i, j, val);
 	}
 	return Z;
 }
 Matrix Matrix::operator=(const Matrix& X)
 {
-	//cout << "Matrix::operator= is invoked..." << endl;
-	//for (int i = 0; i < 31; i++)    //This loops on the rows.
-	//{
-	//	for (int j = 0; j < 31; j++) //This loops on the columns
-	//	{
-	//		cout << X.data[i*N + j] << " ";
-	//	}
-	//	cout << endl;
-	//}
-
-
 
 	//check if X == X
 	if (&X == this)
@@ -127,7 +118,7 @@ Matrix Matrix::operator=(const Matrix& X)
 		M = X.getM();
 		N = X.getN();
 
-		//make new data
+		//Set new data
 		for (int i = 0; i < M; i++){
 			for (int j = 0; j < N; j++){
 				set(i, j, X.data[i*N + j]);
@@ -138,7 +129,7 @@ Matrix Matrix::operator=(const Matrix& X)
 }
 Matrix Matrix::operator++ ()
 {
-	//cout << "Matrix::operator++ is invoked..." << endl;
+	//this will add one to each element in this matrix
 	for (int i = 0; i < M; i++){
 		for (int j = 0; j < N; j++){
 			set(i, j, get(i, j) + 1);
@@ -148,7 +139,7 @@ Matrix Matrix::operator++ ()
 }
 Matrix Matrix::operator-- ()
 {
-	//cout << "Matrix::operator-- is invoked..." << endl;
+	//this will reomve one form each element in this matrix
 	{
 		for (int i = 0; i < M; i++){
 			for (int j = 0; j < N; j++){
@@ -160,40 +151,40 @@ Matrix Matrix::operator-- ()
 }
 double Matrix::operator()(int i, int j)const
 {
-	cout << "Matrix::operator() is invoked..." << endl;
+	//same as get function, will get a value from data
 	return data[i*N + j];
 }
 
-//get, get a value from data
+//get a value from data
 double Matrix::get(int i, int j) const
 {
 	return data[i*N + j];
 }
 
-//set, set a a vale to data
+//set a value to data
 void Matrix::set(int i, int j, double val)
 {
 	data[i*N + j] = val;
 }
 
-//GetM, get the value M from class data member
+//get the value M from class data member
 int Matrix::getM()const
 {
 	return M;
 }
-//GetN, get the value N from class data member
+//get the value N from class data member
 int Matrix::getN()const
 {
 	return N;
 }
 
-//Out_Matrix, output from data, using Row and col to define where
+//output from data, using Row and col to define where
 void Matrix::Output_Matrix(int row, int col){
 	for (int i = 0; i < row; i++)    //This loops on the rows.
 	{
 		for (int j = 0; j < col; j++) //This loops on the columns
 		{
-			cout << data[i*N + j] << "";
+			cout << data[i*N + j] << "";//out each element with a space after it.
 		}
 		cout << endl;
 	}
@@ -202,9 +193,7 @@ void Matrix::Output_Matrix(int row, int col){
 //Matrix get block 
 Matrix Matrix::getblock(int start_row, int end_row, int start_col, int end_col)
 {
-	//cout << "getblock(int start_row, int end_row, int start_col, int end_col) is invoked" << endl;
-
-
+	//get a block of data from another matrix to make a new matrix
 	Matrix X(end_row - start_row + 1, end_col - start_col + 1, 0.0);
 
 	for (int i = start_row; i <= end_row; i++)

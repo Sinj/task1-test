@@ -1,17 +1,17 @@
 //Matrix.h file
-#ifndef __Matrix_H_INCLUDED__   // if x.h hasn't been included yet...
+#ifndef __Matrix_H_INCLUDED__   // if Matrix.h hasn't been included yet...
 #define __Matrix_H_INCLUDED__   //   #define this so the compiler knows it has been included
 
 class Matrix{
 
 public:
-	//if you didnt have a data set
+	//if you didnt have a data set, will set all elements to val
 	Matrix(int sizeR, int sizeC, double val);
-	//if you have data to work with
+	//if you have data to work with.
 	Matrix(int sizeR, int sizeC, double* pData);
 	//Copy constructor
 	Matrix(const Matrix& X);
-	//call the destructor class
+	//call the destructor 
 	~Matrix();
 
 	//Operators
@@ -33,13 +33,13 @@ public:
 	//Matrix getblock 
 	Matrix getblock(int start_row, int end_row, int start_col, int end_col);
 
-	//get M
+	//Return the value of M to call
 	int getM()const;
 
-	//get N
+	//Return the value of N to call
 	int getN()const;
 
-	//output the whole matrix
+	//output the whole matrix to screen
 	void Output_Matrix(int row, int col);
 
 protected:
